@@ -35,3 +35,7 @@ Testado em AlmaLinux 9 com MariaDB 10.11 e rclone 1.75.
 - Os scripts apagam do Drive os backups mais velhos que o prazo configurado. Confira os prazos em
   `backup-drive.conf` antes de agendar.
 - Teste a restauração. Backup que nunca foi restaurado é só uma esperança.
+
+## Licença
+
+MIT. Veja `LICENSE`.
