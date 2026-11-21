@@ -1,0 +1,6 @@
+# nunca versionar configuracao real nem credencial
+backup-drive.conf
+rclone.conf
+.my.cnf
+*.env
+*.log

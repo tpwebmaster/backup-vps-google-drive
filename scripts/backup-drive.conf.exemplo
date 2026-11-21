@@ -1,0 +1,44 @@
+# Configuracao unica dos scripts de backup. Copie para /etc/backup-drive.conf (modo 600, dono
+# root) e ajuste. Os cinco scripts leem este arquivo; nenhum deles guarda senha.
+#
+# A senha do banco fica em /root/.my.cnf e a autorizacao do Drive em
+# /root/.config/rclone/rclone.conf, os dois com modo 600.
+
+# Nome que aparece no assunto dos e-mails: "[ROTULO] Backup OK".
+ROTULO="MeuServidor"
+
+# Remote do rclone e pasta de destino no Google Drive. Os scripts criam as subpastas
+# Files/<site>/ e MySQL/<banco>/ dentro dela.
+DESTINO_DRIVE="gdrive:Backups MeuServidor"
+
+# Quantos dias guardar.
+DIAS_ARQUIVOS=14     # pacotes dos sites, no Drive
+DIAS_BANCO=180       # dumps do banco, no Drive
+DIAS_LOCAL=7         # dumps do banco, no disco do servidor
+
+# Onde ficam os sites: cada subpasta daqui vira um pacote separado.
+RAIZ_SITES="/home"
+# Subpastas de RAIZ_SITES que nao sao site (expressao regular, separada por |). A pasta com o
+# nome completo do servidor (hostname -f), que alguns paineis criam, e ignorada sempre: se
+# houver um site de verdade nela, ponha o caminho em PASTAS_EXTRAS.
+IGNORAR_SITES="backup|cyberpanel|docker"
+# Pastas a mais para copiar, fora de RAIZ_SITES, separadas por espaco. Pode ficar vazio.
+PASTAS_EXTRAS=""
+
+# Tabelas grandes de log que vao so com a estrutura, sem as linhas. Formato banco.tabela,
+# separadas por espaco. Pode ficar vazio.
+SO_ESTRUTURA=""
+
+# Onde os dumps ficam no servidor antes de subir.
+DIR_LOCAL_BANCO="/var/backups/mysql"
+
+# E-mail dos avisos. O remetente precisa ser de um dominio cujo SPF e DKIM autorizem este
+# servidor (ou o relay que o Postfix dele usa), senao o destino recusa ou joga no spam.
+EMAIL_DESTINO="voce@exemplo.com"
+EMAIL_REMETENTE="backup@exemplo.com"
+
+# Uso do disco (em %) a partir do qual o relatorio diario vira ATENCAO.
+DISCO_ALERTA=85
+
+# Pasta dos logs dos backups (files-backup.log, mysql-backup.log, backup-avisos.log).
+DIR_LOG="/var/log"
